@@ -1,0 +1,106 @@
+POSTMAN RAW BODY SAMPLES (JSON)
+Base URL: http://localhost:3000/api/v1
+Header: Content-Type: application/json
+
+==================================================
+1) ROLE APIs
+==================================================
+
+[POST] /roles
+Body:
+{
+  "name": "Admin",
+  "description": "Toan quyen quan tri he thong"
+}
+
+[PUT] /roles/:id
+Body:
+{
+  "name": "Editor",
+  "description": "Cap nhat mo ta role"
+}
+
+==================================================
+2) USER APIs
+==================================================
+
+[POST] /users
+Note: role must be a valid Role ObjectId created from POST /roles
+Body:
+{
+  "username": "nguyenvana",
+  "password": "123456",
+  "email": "nguyenvana@gmail.com",
+  "fullName": "Nguyen Van A",
+  "avatarUrl": "https://i.sstatic.net/l60Hf.png",
+  "status": false,
+  "role": "PUT_ROLE_OBJECT_ID_HERE",
+  "loginCount": 0
+}
+
+[PUT] /users/:id
+Body:
+{
+  "fullName": "Nguyen Van A Updated",
+  "avatarUrl": "https://i.sstatic.net/l60Hf.png",
+  "role": "PUT_ROLE_OBJECT_ID_HERE",
+  "loginCount": 2
+}
+
+[POST] /users/enable
+Body:
+{
+  "email": "nguyenvana@gmail.com",
+  "username": "nguyenvana"
+}
+
+[POST] /users/disable
+Body:
+{
+  "email": "nguyenvana@gmail.com",
+  "username": "nguyenvana"
+}
+
+==================================================
+3) QUICK TEST ORDER (recommended)
+==================================================
+
+Step 1: POST /roles with body in section 1 -> copy returned _id
+Step 2: Replace PUT_ROLE_OBJECT_ID_HERE in user body
+Step 3: POST /users with body in section 2 -> copy returned _id
+Step 4: Test:
+  - GET /users
+  - GET /users?username=nguyen
+  - GET /users/:id
+  - PUT /users/:id
+  - POST /users/enable
+  - POST /users/disable
+  - DELETE /users/:id (soft delete)
+Step 5: Test role endpoints:
+  - GET /roles
+  - GET /roles/:id
+  - PUT /roles/:id
+  - GET /roles/:id/users
+  - DELETE /roles/:id (soft delete)
+
+==================================================
+4) OPTIONAL EXTRA DATA (2nd role + 2nd user)
+==================================================
+
+[POST] /roles
+{
+  "name": "User",
+  "description": "Tai khoan nguoi dung thong thuong"
+}
+
+[POST] /users
+{
+  "username": "tranthib",
+  "password": "123456",
+  "email": "tranthib@gmail.com",
+  "fullName": "Tran Thi B",
+  "avatarUrl": "https://i.sstatic.net/l60Hf.png",
+  "status": true,
+  "role": "PUT_ROLE_OBJECT_ID_HERE",
+  "loginCount": 3
+}

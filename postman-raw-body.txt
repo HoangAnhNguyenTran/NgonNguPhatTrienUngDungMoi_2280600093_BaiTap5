@@ -1,0 +1,130 @@
+POSTMAN RAW BODY SAMPLES
+Base URL: http://localhost:3000/api/v1
+Header: Content-Type: application/json
+
+IMPORTANT
+- Khi test PUT, bat buoc thay :id tren URL bang _id thuc te.
+- Vi du URL dung: /roles/69b0db52ef1da859fbab6c6c
+- Khong gui chuoi mau (vd: PUT_ROLE_OBJECT_ID_HERE) vao cac field ObjectId.
+
+========================================
+1) ROLES
+========================================
+
+[POST] /roles
+{
+  "name": "admin",
+  "description": "Quan tri he thong"
+}
+
+[PUT] /roles/:id
+{
+  "name": "editor",
+  "description": "Co quyen chinh sua noi dung"
+}
+
+URL mau:
+PUT http://localhost:3000/api/v1/roles/PUT_ROLE_ID_HERE
+
+========================================
+2) USERS
+========================================
+
+[POST] /users
+{
+  "username": "nguyenvana",
+  "password": "123456",
+  "email": "vana@gmail.com",
+  "fullName": "Nguyen Van A",
+  "avatarUrl": "https://i.sstatic.net/l60Hf.png",
+  "status": false,
+  "role": "PUT_ROLE_OBJECT_ID_HERE",
+  "loginCount": 0
+}
+
+[PUT] /users/:id
+{
+  "fullName": "Nguyen Van A Updated",
+  "avatarUrl": "https://i.sstatic.net/l60Hf.png",
+  "status": true,
+  "loginCount": 1
+}
+
+URL mau:
+PUT http://localhost:3000/api/v1/users/PUT_USER_ID_HERE
+
+[POST] /users/enable
+{
+  "email": "vana@gmail.com",
+  "username": "nguyenvana"
+}
+
+[POST] /users/disable
+{
+  "email": "vana@gmail.com",
+  "username": "nguyenvana"
+}
+
+========================================
+3) CATEGORIES
+========================================
+
+[POST] /categories
+{
+  "name": "Dien thoai",
+  "image": "https://placeimg.com/640/480/any"
+}
+
+[PUT] /categories/:id
+{
+  "name": "Dien thoai thong minh",
+  "image": "https://placeimg.com/640/480/tech"
+}
+
+URL mau:
+PUT http://localhost:3000/api/v1/categories/PUT_CATEGORY_ID_HERE
+
+========================================
+4) PRODUCTS
+========================================
+
+[POST] /products
+{
+  "title": "iPhone 15",
+  "price": 1000,
+  "images": [
+    "https://placehold.co/600x400",
+    "https://placehold.co/600x400?text=2"
+  ],
+  "description": "Dien thoai cao cap",
+  "category": "PUT_CATEGORY_OBJECT_ID_HERE"
+}
+
+[PUT] /products/:id
+{
+  "title": "iPhone 15 Pro",
+  "price": 1200,
+  "description": "Phien ban nang cap"
+}
+
+URL mau:
+PUT http://localhost:3000/api/v1/products/PUT_PRODUCT_ID_HERE
+
+========================================
+5) QUICK TEST ORDER (GOI Y)
+========================================
+1. Tao role: POST /roles
+2. Lay role id: GET /roles
+3. Tao user (gan role id): POST /users
+4. Enable/Disable user: POST /users/enable, POST /users/disable
+5. Tao category: POST /categories
+6. Lay category id: GET /categories
+7. Tao product (gan category id): POST /products
+8. Test /roles/:id/users voi role id da tao
+
+========================================
+6) CURLY BRACE PLACEHOLDERS
+========================================
+- Thay PUT_ROLE_OBJECT_ID_HERE bang _id thuc te cua role
+- Thay PUT_CATEGORY_OBJECT_ID_HERE bang _id thuc te cua category
+- Thay :id tren URL bang _id thuc te can update/delete/get
